@@ -152,6 +152,7 @@ class ComposerStaticInit28644794df27ea35b4ba3d9e834307a8
         'M' =>
         array (
             'Monolog\\' => 8,
+            'Modules\\' => 8,
             'Mockery\\' => 8,
         ),
         'L' =>
@@ -520,6 +521,10 @@ class ComposerStaticInit28644794df27ea35b4ba3d9e834307a8
         'Monolog\\' =>
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'Modules\\' =>
+        array (
+            0 => __DIR__ . '/../..' . '/modules',
         ),
         'Mockery\\' =>
         array (
