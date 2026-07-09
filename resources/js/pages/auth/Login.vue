@@ -16,7 +16,7 @@ import { request } from '@/routes/password';
 defineOptions({
     layout: {
         title: 'Log in to your account',
-        description: 'Enter your email and password below to log in',
+        // description: 'Enter your email and password below to log in',
     },
 });
 
@@ -36,7 +36,7 @@ defineProps<{
         {{ status }}
     </div>
 
-    <PasskeyVerify />
+    <!-- <PasskeyVerify /> -->
 
     <Form
         v-bind="store.form()"
