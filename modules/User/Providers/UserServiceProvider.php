@@ -3,6 +3,7 @@
 namespace Modules\User\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Database\Seeders\DatabaseSeeder;
 
 class UserServiceProvider extends ServiceProvider
 {
