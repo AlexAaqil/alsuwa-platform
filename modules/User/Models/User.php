@@ -19,6 +19,8 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable, TwoFactorAuthenticatable, HasRoles;
     use HasUuid;
+
+    protected string $guard_name = 'web';
     
     protected $guarded = [];
 
