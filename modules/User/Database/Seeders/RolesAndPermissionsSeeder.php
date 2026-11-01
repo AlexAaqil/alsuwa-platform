@@ -110,6 +110,10 @@ class RolesAndPermissionsSeeder extends Seeder
             'developer' => [],
 
             'finance_staff' => [],
+
+            'cashier'  => ['leads.view', 'customers.view', 'deals.view'],
+
+            'customer' => [],
         ];
 
         foreach ($rolePermissions as $roleName => $rolePermissionNames) {

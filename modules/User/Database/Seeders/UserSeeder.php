@@ -2,54 +2,61 @@
 
 namespace Modules\User\Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 use Modules\User\Models\User;
-
+use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        $password = Hash::make('pass');
-
         $users = [
             [
                 'name' => 'Super Admin',
                 'email' => 'superadmin@gmail.com',
-                'role' => 0,
                 'email_verified_at' => now(),
-                'password' => $password,
+                'password' => 'pass',
+                'role' => 'super_admin',
             ],
             [
                 'name' => 'Admin User',
                 'email' => 'admin@gmail.com',
-                'role' => 1,
                 'email_verified_at' => now(),
-                'password' => $password,
+                'password' => 'pass',
+                'role' => 'admin',
             ],
             [
-                'name' => 'Cashier User',
-                'email' => 'cashier@gmail.com',
-                'role' => 2,
+                'name' => 'Sales User',
+                'email' => 'sales@gmail.com',
                 'email_verified_at' => now(),
-                'password' => $password,
+                'password' => 'pass',
+                'role' => 'sales',
             ],
             [
                 'name' => 'Customer User',
                 'email' => 'customer@gmail.com',
-                'role' => 3,
                 'email_verified_at' => now(),
-                'password' => $password,
-            ]
+                'password' => 'pass',
+                'role' => 'customer', // or add a 'customer' role in the other seeder
+            ],
         ];
 
-        foreach($users as $user) {
-            User::create($user);
+        foreach ($users as $data) {
+            $roleName = $data['role'];
+            unset($data['role']);
+
+            /** @var User $user */
+            $user = User::firstOrCreate(
+                ['email' => $data['email']],
+                $data
+            );
+
+            $role = Role::firstOrCreate([
+                'name' => $roleName,
+                'guard_name' => 'web',
+            ]);
+
+            $user->syncRoles([$role]);
         }
     }
 }

@@ -10,8 +10,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Builder;
-use Modules\Support\Concerns\HasUuid;
 use Spatie\Permission\Traits\HasRoles;
+use Modules\Support\Concerns\HasUuid;
 use Modules\User\Enums\UserStatuses;
 
 class User extends Authenticatable
