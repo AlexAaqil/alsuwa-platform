@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Link, usePage } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid, Menu, Search } from '@lucide/vue';
+import { BookOpen, Folder, LayoutGrid, Menu, Search, Sun, Moon } from '@lucide/vue';
 import { computed } from 'vue';
 import AppLogo from '@/components/AppLogo.vue';
 import AppLogoIcon from '@/components/AppLogoIcon.vue';
@@ -37,6 +37,7 @@ import { getInitials } from '@/composables/useInitials';
 import { toUrl } from '@/lib/utils';
 import { dashboard } from '@/routes';
 import type { BreadcrumbItem, NavItem } from '@/types';
+import { useAppearance } from '@/composables/useAppearance';
 
 type Props = {
     breadcrumbs?: BreadcrumbItem[];
@@ -53,6 +54,8 @@ const { isCurrentUrl, whenCurrentUrl } = useCurrentUrl();
 const activeItemStyles =
     'text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100';
 
+const { appearance, updateAppearance } = useAppearance();
+
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
@@ -62,13 +65,13 @@ const mainNavItems: NavItem[] = [
 ];
 
 const rightNavItems: NavItem[] = [
+    // {
+    //     title: 'Repository',
+    //     href: 'https://github.com/laravel/vue-starter-kit',
+    //     icon: Folder,
+    // },
     {
-        title: 'Repository',
-        href: 'https://github.com/laravel/vue-starter-kit',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
+        title: 'Docs',
         href: 'https://laravel.com/docs/starter-kits#vue',
         icon: BookOpen,
     },
@@ -78,7 +81,7 @@ const rightNavItems: NavItem[] = [
 <template>
     <div>
         <div class="border-sidebar-border/80 border-b">
-            <div class="mx-auto flex h-16 items-center px-4 md:max-w-7xl">
+            <div class="mx-auto flex h-16 items-center px-4 lg:px-16">
                 <!-- Mobile Menu -->
                 <div class="lg:hidden">
                     <Sheet>
@@ -190,7 +193,7 @@ const rightNavItems: NavItem[] = [
 
                 <div class="ml-auto flex items-center space-x-2">
                     <div class="relative flex items-center space-x-1">
-                        <Button
+                        <!-- <Button
                             variant="ghost"
                             size="icon"
                             class="group h-9 w-9 cursor-pointer"
@@ -198,7 +201,17 @@ const rightNavItems: NavItem[] = [
                             <Search
                                 class="size-5 opacity-80 group-hover:opacity-100"
                             />
-                        </Button>
+                        </Button> -->
+
+                        <!-- Theme toggle: always visible, even on mobile -->
+                        <button
+                            @click="updateAppearance(appearance === 'light' ? 'dark' : 'light')"
+                            class="toggle-theme p-2 rounded-md hover:bg-accent"
+                            title="Toggle theme"
+                        >
+                            <Sun v-if="appearance === 'light'" class="icon sun-icon w-5 h-5" />
+                            <Moon v-else class="icon moon-icon w-5 h-5" />
+                        </button>
 
                         <div class="hidden space-x-1 lg:flex">
                             <template
